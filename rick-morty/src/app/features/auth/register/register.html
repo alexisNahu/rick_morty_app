@@ -1,0 +1,125 @@
+<div class="min-h-screen flex items-center justify-center bg-slate-950 px-4 relative overflow-hidden">
+  <div class="absolute w-96 h-96 bg-lime-500/20 rounded-full blur-[120px] -top-20 -left-20"></div>
+  <div class="absolute w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] -bottom-20 -right-20"></div>
+
+  <div class="max-w-md w-full bg-slate-900 border border-lime-500/30 rounded-2xl shadow-[0_0_50px_-12px_rgba(132,204,22,0.2)] p-8 z-10">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-black tracking-tighter text-white uppercase italic">Create Account</h2>
+      <p class="text-slate-400 text-xs mt-1 tracking-widest uppercase">Join the Rick & Morty Adventure</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-5">
+
+      <div>
+        <label for="name" class="block text-xs font-bold text-lime-400 uppercase tracking-wider mb-1">Full Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Your name"
+          class="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-700 text-lime-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:border-lime-500 transition-all placeholder:text-slate-600"
+          [class.border-red-500]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+        >
+        @if (registerForm.get('name')?.touched) {
+          @if (registerForm.get('name')?.errors?.['minlength']) {
+            <span class="text-[10px] text-red-400 mt-1 block uppercase font-bold tracking-tighter">
+                Min. {{ registerForm.get('name')?.errors?.['minlength'].requiredLength }} characters
+              </span>
+          }
+        }
+      </div>
+
+      <div>
+        <label for="email" class="block text-xs font-bold text-lime-400 uppercase tracking-wider mb-1">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="c-137@citadel.com"
+          class="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-700 text-lime-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:border-lime-500 transition-all placeholder:text-slate-600"
+          [class.border-red-500]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        >
+        @if (registerForm.get('email')?.touched) {
+          @if (registerForm.get('email')?.errors?.['required']) {
+            <span class="text-[10px] text-red-400 mt-1 block uppercase font-bold tracking-tighter">
+      Email is required
+    </span>
+          }
+          @if (registerForm.get('email')?.errors?.['email']) {
+            <span class="text-[10px] text-red-400 mt-1 block uppercase font-bold tracking-tighter">
+      ERROR: Invalid email format
+    </span>
+          }
+        }
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="password" class="block text-xs font-bold text-lime-400 uppercase tracking-wider mb-1">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            placeholder="•••••"
+            class="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-700 text-lime-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:border-lime-500 transition-all placeholder:text-slate-600"
+            [class.border-red-500]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          >
+          @if (registerForm.get('password')?.touched) {
+            @if (registerForm.get('password')?.errors?.['minlength']) {
+              <span class="text-[10px] text-red-400 mt-1 block uppercase font-bold tracking-tighter">
+                Min. {{ registerForm.get('password')?.errors?.['minlength'].requiredLength }} characters
+              </span>
+            }
+          }
+        </div>
+
+        <div>
+          <label for="repeat_password" class="block text-xs font-bold text-lime-400 uppercase tracking-wider mb-1">Repeat Password</label>
+          <input
+            id="repeat_password"
+            type="password"
+            formControlName="repeat_password"
+            placeholder="•••••"
+            class="mt-1 block w-full px-4 py-3 bg-slate-800 border border-slate-700 text-lime-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-lime-500/50 focus:border-lime-500 transition-all placeholder:text-slate-600"
+            [class.border-red-500]="registerForm.hasError('mismatch') && registerForm.get('repeat_password')?.touched"
+          >
+          @if (registerForm.get('repeat_password')?.errors?.['mismatch'] && registerForm.get('repeat_password')?.touched) {
+            <span class="text-[10px] text-red-400 mt-1 block uppercase font-bold tracking-tighter">
+              Passwords do not match
+            </span>
+          }
+        </div>
+      </div>
+
+      @if (message()) {
+        <div class="bg-red-950/30 text-red-400 p-3 rounded-lg text-xs border border-red-500/50 animate-pulse">
+          ⚠️ {{ message() }}
+        </div>
+      }
+
+      <button
+        type="submit"
+        [disabled]="isLoading() || registerForm.invalid"
+        class="w-full flex justify-center py-3 px-4 rounded-lg shadow-lg text-sm font-black uppercase tracking-widest text-slate-950 bg-lime-400 hover:bg-lime-300 active:scale-[0.98] transition-all disabled:opacity-30 disabled:grayscale disabled:cursor-not-allowed shadow-lime-500/20">
+        @if (isLoading()) {
+          <span class="flex items-center">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Registering...
+          </span>
+        } @else {
+          Sign Up
+        }
+      </button>
+
+    </form>
+
+    <div class="mt-6 text-center text-xs text-slate-500 uppercase tracking-tighter">
+      Already have an account? <a routerLink="/auth/login" class="text-cyan-400 hover:text-cyan-300 font-bold transition-colors">Sign in</a>
+    </div>
+
+  </div>
+</div>
+```

@@ -1,0 +1,56 @@
+<div class="p-6">
+  <header class="mb-8">
+    <h1 class="text-3xl font-extrabold text-white tracking-tight">
+      <span class="text-indigo-500">Rick & Morty</span> Characters
+    </h1>
+    <p class="text-slate-400">Exploring the multiverse from Paraguay.</p>
+  </header>
+
+  <app-character-filter></app-character-filter>
+
+  @if (charService.character.isLoading()) {
+    <div class="flex justify-center items-center h-64">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+    </div>
+  }
+
+  @if (charService.character.value(); as response) {
+    @if (isList(response)) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (item of response.results; track item.id) {
+          <app-card [character]="item"></app-card>
+        }
+      </div>
+
+      <div class="flex justify-center items-center gap-4 mt-10 pb-10">
+        <button
+          [routerLink]="['/', APP_ROUTES.CHARACTERS]"
+          [queryParams]="prevPageParams()"
+          [disabled]="!response.info.prev"
+          class="px-5 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 disabled:opacity-30 transition-all">
+          Previous
+        </button>
+
+        <span class="text-slate-300 font-mono">
+          Page {{page()}} of {{ response.info.pages }}
+        </span>
+
+        <button
+          [routerLink]="['/', APP_ROUTES.CHARACTERS]"
+          [queryParams]="nextPageParams()"
+          [disabled]="!response.info.next"
+          class="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 disabled:opacity-30 transition-all">
+          Next
+        </button>
+      </div>
+    }
+  }
+
+  @if (charService.character.error()) {
+    <app-not-found
+      title="No Results Found"
+      message="No characters match your current filters. Try adjusting your search criteria."
+      [showButton]="false">
+    </app-not-found>
+  }
+</div>

@@ -1,0 +1,88 @@
+<button
+  (click)="toggleSidebar()"
+  class="md:hidden fixed top-4 left-4 z-50 p-2 bg-slate-800 text-white rounded-lg border border-slate-700 shadow-xl active:scale-95 transition-all"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+  </svg>
+</button>
+
+<div
+  (click)="toggleSidebar()"
+  class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden"
+  [class]="isSidebarOpen() ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'"
+></div>
+
+<aside
+  class="fixed top-0 left-0 z-50 w-64 h-screen transition-transform bg-slate-900 border-r border-slate-800"
+  [class]="isSidebarOpen() ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
+>
+  <div class="h-full px-3 py-4 overflow-y-auto flex flex-col">
+
+    <div class="flex items-center ps-2.5 mb-10">
+      <span class="self-center text-xl font-bold whitespace-nowrap text-white tracking-tighter">
+        <a [routerLink]="['/',APP_ROUTES.CHARACTERS]">RICK & MORTY <span class="text-indigo-500">LAB</span></a>
+      </span>
+    </div>
+
+    <ul class="space-y-2 font-medium flex-1">
+      <li>
+        <a routerLink="/characters" routerLinkActive="bg-slate-800 text-white"
+           class="flex items-center p-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white group transition-colors">
+          <svg class="w-5 h-5 transition duration-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span class="ms-3">Characters</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/locations" routerLinkActive="bg-slate-800 text-white"
+           class="flex items-center p-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white group transition-colors">
+          <svg class="w-5 h-5 transition duration-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <span class="ms-3">Locations</span>
+        </a>
+      </li>
+
+      <button
+        (click)="logout()"
+        class="flex items-center w-full p-2 mt-2 text-slate-400 rounded-lg hover:bg-red-500/10 hover:text-red-400 group transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+        <span class="ms-3 text-sm font-medium">Cerrar sesión</span>
+      </button>
+    </ul>
+
+    <div class="pt-4 mt-4 border-t border-slate-800">
+      <div class="flex items-center p-2 text-xs text-slate-500 uppercase font-semibold">
+        Sistemas - 5to Año
+      </div>
+      <div class="flex items-center p-2 text-slate-300">
+        <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold mr-2">
+          AL
+        </div>
+        <span class="text-sm truncate">Alexis Idoyaga</span>
+      </div>
+    </div>
+  </div>
+  <div class="pt-4 mt-4 border-t border-slate-800">
+    <div class="flex items-center p-2 text-xs text-slate-500 uppercase font-semibold">
+      Sistemas - 5to Año
+    </div>
+    <div class="flex items-center p-2 text-slate-300">
+      <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-bold mr-2">
+        AL
+      </div>
+      <span class="text-sm truncate">Alexis Idoyaga</span>
+    </div>
+
+    <!-- ✅ Botón logout -->
+
+  </div>
+</aside>
+

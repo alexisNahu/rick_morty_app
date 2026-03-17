@@ -1,0 +1,58 @@
+<div class="p-6">
+  <header class="mb-8">
+    <h1 class="text-3xl font-extrabold text-white tracking-tight">
+      Localizaciones de <span class="text-indigo-500">Rick & Morty</span>
+    </h1>
+    <p class="text-slate-400">Descubriendo cada rincón del multiverso.</p>
+  </header>
+
+  <app-location-filter></app-location-filter>
+
+  @if (lcsService.location.isLoading()) {
+    <div class="flex justify-center items-center h-64">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+    </div>
+  }
+
+  @if (lcsService.location.value(); as response) {
+    @if (isList(response)) {
+      <div  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (item of response.results; track item.id) {
+          <app-location-cards [location]="item"></app-location-cards>
+        }
+      </div>
+
+      <div class="flex justify-center items-center gap-4 mt-10 pb-10">
+        <button
+          [routerLink]="['/locations']"
+          [queryParams]="prevPageParams()"
+          [disabled]="!response.info.prev"
+          class="px-5 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 disabled:opacity-30 transition-opacity">
+          Anterior
+        </button>
+
+        <span class="text-slate-300 font-mono">
+          Página {{ page() }} de {{ response.info.pages }}
+        </span>
+
+        <button
+          [routerLink]="['/locations']"
+          [queryParams]="nextPageParams()"
+          [disabled]="!response.info.next"
+          class="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 disabled:opacity-30 transition-opacity">
+          Siguiente
+        </button>
+      </div>
+    } @else {
+      <div class="text-center text-slate-500 py-12">
+        No se encontraron dimensiones con esos criterios.
+      </div>
+    }
+  }
+
+  @if (lcsService.location.error()) {
+    <div class="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-lg">
+      Error al cargar las localizaciones. Verifica tu conexión.
+    </div>
+  }
+</div>
