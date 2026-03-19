@@ -38,13 +38,14 @@ export const routes: Routes = [
       {
         path: `${APP_ROUTES.LOCATIONS_DETAILS}/:id`,
         loadComponent: () => import('./features/location-details/location-details').then(m => m.LocationDetails)
-      }
+      },
+      {
+        path: '404',
+        loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound)
+      },
+      { path: '**', redirectTo: '404' }
     ]
   },
-  {
-    path: '404',
-    loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound)
-  },
-  { path: '**', redirectTo: '404' }
+
 
 ];
