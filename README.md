@@ -9,7 +9,7 @@ A high-performance web application built with **Angular 20**, focused on reactiv
 * **Express.js Backend:** Secure `httpOnly` cookie implementation to mitigate XSS and CSRF risks.
 * **PostgreSQL & Drizzle:** Robust data persistence and type-safe database queries.
 * **JWT (JSON Web Tokens):** Dual-token authentication system (`access_token` & `refresh_token`) with automated session validation.
-
+* **httpResource:** Use for the new httpResoource to get api data.
 ---
 
 ## 🔐 Key Features
