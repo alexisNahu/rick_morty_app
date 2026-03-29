@@ -7,7 +7,6 @@ build/
 config.ini
 
 node_modules/
-services/
 
 # Ignora todos los archivos en el directorio "temp"
 temp/*
