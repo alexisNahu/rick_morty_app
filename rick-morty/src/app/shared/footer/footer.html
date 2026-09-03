@@ -1,0 +1,72 @@
+<footer class="mt-12 border-t border-slate-800 bg-slate-950 px-4 py-16 sm:px-8">
+  <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-[2fr_1fr]">
+
+    <div class="rounded-2xl border border-slate-800 bg-slate-900 p-8">
+      <h2 class="text-2xl font-black uppercase italic tracking-tighter text-white">
+        About this <span class="text-lime-400">project</span>
+      </h2>
+      <p class="mt-3 text-sm leading-relaxed text-slate-400">
+        A Rick &amp; Morty companion app built with Angular 20 (Signals &amp; Resources) and an
+        Express + PostgreSQL backend, with full SSR/Hydration support and a JWT-based auth system.
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        @for (feature of features; track feature.title; let i = $index) {
+          <div class="footer-item flex gap-3" [style.animation-delay.ms]="i * 80">
+            <i class="bi {{ feature.icon }} shrink-0 text-xl text-lime-400"></i>
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-wide text-white">{{ feature.title }}</h3>
+              <p class="mt-1 text-xs leading-relaxed text-slate-400">{{ feature.text }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <h3 class="mt-10 text-xs font-bold uppercase tracking-widest text-lime-400">Built with</h3>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        @for (tech of techStack; track tech.name; let i = $index) {
+          <div class="footer-item flex gap-3" [style.animation-delay.ms]="i * 60">
+            <i class="bi {{ tech.icon }} shrink-0 text-lg text-cyan-400"></i>
+            <div>
+              <span class="text-xs font-bold text-white">{{ tech.name }}</span>
+              <p class="text-xs leading-relaxed text-slate-500">{{ tech.text }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center rounded-2xl border border-lime-500/30 bg-slate-900 p-8 text-center">
+      <div class="flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 text-2xl font-black text-white">
+        AI
+      </div>
+      <h2 class="mt-4 text-xl font-black uppercase italic tracking-tighter text-white">About me</h2>
+      <p class="mt-3 text-xs leading-relaxed text-slate-400">
+        Hi, I'm Alexis — a 5th-year Computer Engineering student. I built this project to practice
+        Angular's newest reactive APIs (Signals, httpResource), SSR and a full auth flow from
+        scratch, front to back.
+      </p>
+      <div class="mt-6 flex gap-3">
+        <a
+          href="https://github.com/alexisNahu"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-xs font-bold text-slate-200 transition-colors hover:bg-slate-700 hover:text-white"
+        >
+          <i class="bi bi-github"></i> GitHub
+        </a>
+        <a
+          href="mailto:alexisnahuelidoyaga@gmail.com"
+          class="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 text-xs font-bold text-slate-200 transition-colors hover:bg-slate-700 hover:text-white"
+        >
+          <i class="bi bi-envelope-fill"></i> Email
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="mx-auto mt-10 max-w-5xl border-t border-slate-800 pt-6 text-center text-[10px] uppercase tracking-widest text-slate-600">
+    Rick &amp; Morty Lab — Sistemas, 5to Año
+  </p>
+</footer>
