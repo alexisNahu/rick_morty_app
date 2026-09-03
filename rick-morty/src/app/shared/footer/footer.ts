@@ -41,7 +41,7 @@ const FEATURES: Feature[] = [
   {
     icon: 'bi-database-fill-check',
     title: 'Type-safe persistence',
-    text: 'PostgreSQL with Drizzle ORM for reliable, fully typed access to user data.',
+    text: 'A managed Postgres database with Drizzle ORM for reliable, fully typed access to user data.',
   },
 ];
 
@@ -85,6 +85,16 @@ const TECH_STACK: TechItem[] = [
     icon: 'bi-ui-checks-grid',
     name: 'Reactive Forms + Zod',
     text: 'Validates and syncs the login/register forms, client and server side.',
+  },
+  {
+    icon: 'bi-triangle-fill',
+    name: 'Vercel',
+    text: 'Hosts the SSR frontend and the auth API as serverless functions in one deployment.',
+  },
+  {
+    icon: 'bi-lightning-fill',
+    name: 'Supabase',
+    text: 'Managed PostgreSQL, reachable from serverless functions through a connection pooler.',
   },
 ];
 
