@@ -56,3 +56,24 @@ The project uses an `.env` file for sensitive data. **Do not commit your `.env` 
 cd backend
 npm install
 npm run dev
+```
+
+**Frontend:**
+```bash
+cd rick-morty
+npm install
+npm start
+```
+
+---
+
+## 🖥️ Local Setup Log (2026-09-03)
+
+State of the local dev environment on this machine, for future reference:
+
+* **PostgreSQL**: installed via system package, service was disabled — started with `sudo systemctl enable --now postgresql`. System role `postgres` uses password auth (password: `1234`, set by the project owner, not the `.env.example` placeholder).
+* **Database**: `rick_morty_db`, created with `createdb`. Migrations applied with `npx drizzle-kit migrate` (uses `backend/drizzle.config.ts`, reads `backend/src/db/migrations/*`). Currently has one table: `users`.
+* **`backend/.env`**: created from `.env.example`, filled with local values (`DB_USER=postgres`, `DB_PASSWORD=1234`, `DB_NAME=rick_morty_db`, `DB_HOST=localhost`, `DB_PORT=5432`, `PORT=3000`). Not committed (gitignored).
+* **Port mismatch bug fixed**: `rick-morty/src/app/shared/models.ts` (`APIS.BACKEND.AUTH.*`) hardcodes `http://localhost:3000/auth/...`, but `backend/index.ts` defaulted to port `4000` when `PORT` wasn't set. Set `PORT=3000` in `backend/.env` so the frontend's hardcoded URLs actually reach the backend. If the backend is ever moved to a different port, either update `PORT` in `.env` back to match, or move `models.ts` to read from an Angular environment file instead of a hardcoded URL.
+* **Verified working**: `POST /auth/register` and `POST /auth/login` tested directly with `curl` — both return 200 and login sets `access_token`/`refresh_token` as `httpOnly`, `SameSite=Strict` cookies.
+* **Dev servers**: backend (`npm run dev` in `backend/`) on `http://localhost:3000`, frontend (`npm start` in `rick-morty/`) on `http://localhost:4200`.
