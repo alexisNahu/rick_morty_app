@@ -28,10 +28,10 @@ export const APIS = {
   },
   BACKEND: {
     AUTH: {
-      REGISTER: 'http://localhost:3000/auth/register',
-      LOGIN: 'http://localhost:3000/auth/login',
-      LOGOUT: 'http://localhost:3000/auth/logout',
-      ME: 'http://localhost:3000/auth/me'
+      REGISTER: '/auth/register',
+      LOGIN: '/auth/login',
+      LOGOUT: '/auth/logout',
+      ME: '/auth/me'
     }
   }
 }

@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/auth/:path*", "destination": "/api/backend" },
     { "source": "/(.*)", "destination": "/api" }
   ],
   "functions": {
