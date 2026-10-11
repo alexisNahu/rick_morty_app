@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 
 from app.config import config
 from app.errors import ApiError
-from app.routers import auth
+from app.routers import auth, keepalive
 
 logger = logging.getLogger(__name__)
 
@@ -39,3 +39,4 @@ async def api_error_handler(request: Request, exc: ApiError):
 
 
 app.include_router(auth.router)
+app.include_router(keepalive.router)

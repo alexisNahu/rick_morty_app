@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/auth/:path*",
-      "destination": "https://BACKEND_URL.vercel.app/auth/:path*"
+      "destination": "https://backend-two-chi-22.vercel.app/auth/:path*"
     },
     {
       "source": "/(.*)",

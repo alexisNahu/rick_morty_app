@@ -70,8 +70,8 @@ npm start
 ### Deploy (Vercel)
 Frontend and backend are two separate Vercel projects from this repo:
 
-* **`backend/`** (Root Directory = `backend`): `api/index.py` serves the FastAPI app and `api/keepalive.py` is the daily cron that keeps Supabase awake. Set `DB_*`, `JWT_SECRET`, `REFRESH_TOKEN` and `CRON_SECRET` there.
-* **`rick-morty/`** (Root Directory = `rick-morty`): the SSR frontend. Its `vercel.json` proxies `/auth/*` to the backend deployment, so the auth cookies stay on the frontend's domain — replace `BACKEND_URL` with the backend project's domain.
+* **`backend/`** (Root Directory = `backend`): Vercel auto-detects the FastAPI app in `app/main.py`; the daily cron hits `/api/keepalive` to keep Supabase awake. Set `DB_*`, `JWT_SECRET`, `REFRESH_TOKEN` and `CRON_SECRET` there.
+* **`rick-morty/`** (Root Directory = `rick-morty`): the SSR frontend. Its `vercel.json` proxies `/auth/*` to the backend deployment, so the auth cookies stay on the frontend's domain — currently `https://backend-two-chi-22.vercel.app`.
 
 ---
 
