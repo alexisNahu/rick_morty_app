@@ -41,7 +41,7 @@ const FEATURES: Feature[] = [
   {
     icon: 'bi-database-fill-check',
     title: 'Type-safe persistence',
-    text: 'A managed Postgres database with Drizzle ORM for reliable, fully typed access to user data.',
+    text: 'A managed Postgres database with SQLAlchemy for reliable, typed access to user data.',
   },
 ];
 
@@ -54,7 +54,7 @@ const TECH_STACK: TechItem[] = [
   {
     icon: 'bi-code-square',
     name: 'TypeScript',
-    text: 'Static typing across the entire codebase, frontend and backend.',
+    text: 'Static typing across the entire frontend codebase.',
   },
   {
     icon: 'bi-palette-fill',
@@ -68,13 +68,13 @@ const TECH_STACK: TechItem[] = [
   },
   {
     icon: 'bi-server',
-    name: 'Express.js',
-    text: 'REST API for authentication, sitting behind httpOnly cookies.',
+    name: 'FastAPI',
+    text: 'Python REST API for authentication, sitting behind httpOnly cookies.',
   },
   {
     icon: 'bi-diagram-3-fill',
-    name: 'Drizzle ORM',
-    text: 'Type-safe SQL queries and migrations against PostgreSQL.',
+    name: 'SQLAlchemy',
+    text: 'Typed ORM models and queries against PostgreSQL.',
   },
   {
     icon: 'bi-key-fill',
@@ -83,8 +83,8 @@ const TECH_STACK: TechItem[] = [
   },
   {
     icon: 'bi-ui-checks-grid',
-    name: 'Reactive Forms + Zod',
-    text: 'Validates and syncs the login/register forms, client and server side.',
+    name: 'Reactive Forms + Zod / Pydantic',
+    text: 'Zod validates the login/register forms on the client, Pydantic on the server.',
   },
   {
     icon: 'bi-triangle-fill',

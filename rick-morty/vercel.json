@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/auth/:path*",
-      "destination": "/api/backend"
+      "destination": "https://BACKEND_URL.vercel.app/auth/:path*"
     },
     {
       "source": "/(.*)",
@@ -13,11 +13,5 @@
     "api/index.js": {
       "includeFiles": "dist/rick-morty/**"
     }
-  },
-  "crons": [
-    {
-      "path": "/api/keepalive",
-      "schedule": "0 12 * * *"
-    }
-  ]
+  }
 }

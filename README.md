@@ -6,8 +6,8 @@ A high-performance web application built with **Angular 20**, focused on reactiv
 
 * **Angular 20 (Signals & Resources):** Leveraging the `httpResource` for native, signal-based HTTP request management.
 * **RxJS Interop:** Seamless integration of `firstValueFrom` for handling asynchronous logic within services.
-* **Express.js Backend:** Secure `httpOnly` cookie implementation to mitigate XSS and CSRF risks.
-* **PostgreSQL & Drizzle:** Robust data persistence and type-safe database queries.
+* **FastAPI Backend (Python):** Secure `httpOnly` cookie implementation to mitigate XSS and CSRF risks.
+* **PostgreSQL & SQLAlchemy:** Robust data persistence with typed ORM models.
 * **JWT (JSON Web Tokens):** Dual-token authentication system (`access_token` & `refresh_token`) with automated session validation.
 * **httpResource:** Use for the new httpResoource to get api data.
 ---
@@ -34,29 +34,31 @@ A sophisticated, asynchronous Guard that handles the "initial load" challenge:
 
 ### 1. Prerequisites
 * Node.js (LTS version)
+* Python 3.12+
 * PostgreSQL database
 
 ### 2. Environment Configuration
-The project uses an `.env` file for sensitive data. **Do not commit your `.env` file.** Instead, use the template provided in `.env.example`.
+The backend reads `backend/.env`. **Do not commit your `.env` file.** Instead, use the template provided in `backend/.env.example`.
 
 1.  Copy the example file:
     ```bash
-    cp .env.example .env
+    cp backend/.env.example backend/.env
     ```
-2.  Update the values in `.env` with your local credentials:
-    ```env
-    PORT=3000
-    DATABASE_URL=postgres://user:password@localhost:5432/your_db
-    JWT_SECRET=your_secure_random_string
+2.  Update the values with your local credentials (`DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `JWT_SECRET`, `REFRESH_TOKEN`). Alternatively set `DATABASE_URL=postgresql://user:password@localhost:5432/your_db`.
+3.  On a fresh database, create the schema:
+    ```bash
+    psql -d your_db -f backend/schema.sql
     ```
 
 ### 3. Running Project
-**Backend:**
+**Backend (FastAPI, port 3000):**
 ```bash
 cd backend
-npm install
-npm run dev
+python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
+.venv/bin/uvicorn app.main:app --reload --port 3000
 ```
+(or from `rick-morty/`: `npm run server:install` and `npm run server:dev`)
+Interactive API docs: `http://localhost:3000/docs`.
 
 **Frontend:**
 ```bash
@@ -64,6 +66,12 @@ cd rick-morty
 npm install
 npm start
 ```
+
+### Deploy (Vercel)
+Frontend and backend are two separate Vercel projects from this repo:
+
+* **`backend/`** (Root Directory = `backend`): `api/index.py` serves the FastAPI app and `api/keepalive.py` is the daily cron that keeps Supabase awake. Set `DB_*`, `JWT_SECRET`, `REFRESH_TOKEN` and `CRON_SECRET` there.
+* **`rick-morty/`** (Root Directory = `rick-morty`): the SSR frontend. Its `vercel.json` proxies `/auth/*` to the backend deployment, so the auth cookies stay on the frontend's domain — replace `BACKEND_URL` with the backend project's domain.
 
 ---
 
