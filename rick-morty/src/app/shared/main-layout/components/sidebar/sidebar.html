@@ -47,6 +47,16 @@
         </a>
       </li>
 
+      <li>
+        <a [routerLink]="['/', APP_ROUTES.ABOUT]" routerLinkActive="bg-slate-800 text-white"
+           class="flex items-center p-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white group transition-colors">
+          <svg class="w-5 h-5 transition duration-75" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="ms-3">About</span>
+        </a>
+      </li>
+
       <button
         (click)="logout()"
         class="flex items-center w-full p-2 mt-2 text-slate-400 rounded-lg hover:bg-red-500/10 hover:text-red-400 group transition-colors"

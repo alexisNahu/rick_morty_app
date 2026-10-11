@@ -18,6 +18,10 @@ export const routes: Routes = [
     ]
   },
   {
+    path: APP_ROUTES.ABOUT,
+    loadComponent: () => import('./features/about/about').then(m => m.About)
+  },
+  {
     path: '',
     component: MainLayout,
     canActivate: [authGuard],

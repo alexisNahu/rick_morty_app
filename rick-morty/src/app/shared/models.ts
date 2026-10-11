@@ -90,7 +90,8 @@ export enum APP_ROUTES {
   LOCATIONS_DETAILS = 'location-details',
   LOGIN = 'auth/login',
   REGISTER = 'auth/register',
-  LOGOUT = 'auth/logout'
+  LOGOUT = 'auth/logout',
+  ABOUT = 'about'
 }
 
 export interface LoginResponse {
