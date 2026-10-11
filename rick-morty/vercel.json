@@ -1,11 +1,23 @@
 {
   "rewrites": [
-    { "source": "/auth/:path*", "destination": "/api/backend" },
-    { "source": "/(.*)", "destination": "/api" }
+    {
+      "source": "/auth/:path*",
+      "destination": "/api/backend"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
   ],
   "functions": {
     "api/index.js": {
       "includeFiles": "dist/rick-morty/**"
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/keepalive",
+      "schedule": "0 12 * * *"
+    }
+  ]
 }
